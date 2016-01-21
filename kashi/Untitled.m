@@ -1,0 +1,15 @@
+clc; clear;
+y0=[1;1];
+opt=odeset('RelTol',1.0e-5);
+[x,y]=ode45(@fxy,[0 20],y0,opt);
+Mmax=length(x);
+fw=fopen('Lr_07.res','wt');
+ fprintf(fw,'    x       y       yI     yII');
+ for i=1:Mmax;
+  fprintf(fw,'\n');
+  fprintf(fw,'%8.4f',x(i),y(i,1),y(i,2));
+ end;
+fclose(fw);
+plot(x,y(:,1),'-k',x,y(:,2),'--k.');
+grid on; xlabel('x'); ylabel('y,yI');
+legend('y','yI',0);

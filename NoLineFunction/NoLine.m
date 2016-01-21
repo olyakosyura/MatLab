@@ -1,0 +1,13 @@
+clc;
+clear;
+fx=@(x) 2*sin(exp(x))+exp(-x);
+x=0:0.1:2;
+y=fx(x);
+plot(x,y); grid on; xlabel('x'); ylabel('y');
+opt=optimset('TolX',1.0e-5);
+[x1,f1]=fzero(fx,1.2,opt);
+[x2,f2]=fzero(fx,1.8,opt);
+fprintf('%s%9.6f\n ','f1=',f1);
+fprintf('%s%9.6f\n ','x1=',x1);
+fprintf('%s%9.6f\n ','f2=',f2);
+fprintf('%s%9.6f\n ','x2=',x2);

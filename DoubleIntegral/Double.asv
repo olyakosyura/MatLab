@@ -1,0 +1,22 @@
+clc;
+clear;
+fxy=@(x,y) sqrt(x.^2+3*y.^2 - 2*x+2);
+fi=-1;
+I2=quad2d(fxy,0,3,fi,@psi,'RelTol',0.0001);
+  mx=201;
+  my=201;
+  x=linspace(0,1.5,mx);
+  ymin=min(fi(x));
+  ymax=max(psi(x));
+  y=linspace(ymin,ymax,my);
+  [xm,ym]=meshgrid(x,y);
+  for i=1:mx;
+    for j=1:my;
+     if(y(j)<=psi(x(i))&&y(j)>=fi(x(i)))
+        zm(j,i)=fxy(x(i),y(j));
+       else zm(j,i)=NaN;
+      end;
+    end;
+  end;
+surf(xm,ym,zm); shading interp; colorbar;
+xlabel('x'); ylabel('y'); zlabel('z');
